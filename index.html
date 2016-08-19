@@ -50,7 +50,7 @@
 }
 #full-clndr .clndr-grid {
   float: left;
-  width: 65%;
+  width: 100%;
   border-right: 2px solid white;
 }
 #full-clndr .clndr-grid .days-of-the-week {
@@ -80,6 +80,20 @@
   background-image: url('http://kylestetz.github.io/CLNDR/css/./triangle.svg');
   background-size: cover;
   background-position: center;
+  position: relative;
+}
+#full-clndr .clndr-grid .days .day .event-indicator, #full-clndr .clndr-grid .days .empty .event-indicator {
+    background-color: #3BB7E8;
+    border-radius: 100%;
+    color: #fff;
+    cursor: pointer;
+    font-size: 9px;
+    height: 15px;
+    line-height: 16px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 15px;
 }
 #full-clndr .clndr-grid .days .day.event .day-number,
 #full-clndr .clndr-grid .days .empty.event .day-number {
@@ -110,7 +124,7 @@
   color: #4f4f4f;
 }
 #full-clndr .event-listing .event-item-location {
-  font-weight: 400;
+  font-weight: 1100;
 }
 .noselect {
   -webkit-user-select: none;
@@ -631,7 +645,6 @@ strong {
               <div class="clndr-previous-button">&lt;</div>
               <div class="clndr-next-button">&gt;</div>
               <div class="current-month"><%= month %> <%= year %></div>
-
             </div>
             <div class="clndr-grid">
               <div class="days-of-the-week clearfix">
@@ -641,19 +654,11 @@ strong {
               </div>
               <div class="days">
                 <% _.each(days, function(day) { %>
-                  <div class="<%= day.classes %>" id="<%= day.id %>"><span class="day-number"><%= day.day %></span></div>
+                  <div class="<%= day.classes %>" id="<%= day.id %>">  <% if(day.events.length > 0) { %> <div class="event-indicator"><%= day.events.length %></div><% } %><span class="day-number"><%= day.day %></span></div>
                 <% }); %>
               </div>
             </div>
-            <div class="event-listing">
-              <div class="event-listing-title">EVENTS THIS MONTH</div>
-              <% _.each(eventsThisMonth, function(event) { %>
-                  <div class="event-item">
-                    <div class="event-item-name"><%= event.title %></div>
-                    <div class="event-item-location"><%= event.location %></div>
-                  </div>
-                <% }); %>
-            </div>
+              
           </script>
         </div>
         <div id="mini-clndr">

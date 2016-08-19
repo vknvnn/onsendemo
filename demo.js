@@ -15,6 +15,12 @@ $( function() {
   clndr = $('#full-clndr').clndr({
     template: $('#full-clndr-template').html(),
     events: events,
+	clickEvents: {
+      click: function(target) {
+        console.log(target);
+      }
+    },
+	adjacentDaysChangeMonth: true,
     forceSixRows: true
   });
   $('#mini-clndr').clndr({
@@ -22,6 +28,7 @@ $( function() {
     events: events,
     clickEvents: {
       click: function(target) {
+	  console.log(target);
         if(target.events.length) {
           var daysContainer = $('#mini-clndr').find('.days-container');
           daysContainer.toggleClass('show-events', true);
